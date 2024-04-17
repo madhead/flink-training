@@ -44,7 +44,9 @@ public class RidesAndFaresExercise {
     private final SourceFunction<TaxiFare> fareSource;
     private final SinkFunction<RideAndFare> sink;
 
-    /** Creates a job using the sources and sink provided. */
+    /**
+     * Creates a job using the sources and sink provided.
+     */
     public RidesAndFaresExercise(
             SourceFunction<TaxiRide> rideSource,
             SourceFunction<TaxiFare> fareSource,
@@ -58,8 +60,8 @@ public class RidesAndFaresExercise {
     /**
      * Creates and executes the pipeline using the StreamExecutionEnvironment provided.
      *
-     * @throws Exception which occurs during job execution.
      * @return {JobExecutionResult}
+     * @throws Exception which occurs during job execution.
      */
     public JobExecutionResult execute() throws Exception {
 
@@ -97,6 +99,8 @@ public class RidesAndFaresExercise {
 
     public static class EnrichmentFunction
             extends RichCoFlatMapFunction<TaxiRide, TaxiFare, RideAndFare> {
+
+        // ValueState
 
         @Override
         public void open(Configuration config) throws Exception {
