@@ -32,7 +32,7 @@ public class DataGenerator {
 
     private static final int SECONDS_BETWEEN_RIDES = 20;
     private static final int NUMBER_OF_DRIVERS = 200;
-    public static final Instant BEGINNING = Instant.parse("2020-01-01T12:00:00.00Z");
+    public static final Instant BEGINNING = Instant.parse("2024-01-01T12:00:00.00Z");
 
     private transient long rideId;
 
