@@ -30,7 +30,6 @@ import org.apache.flink.streaming.api.functions.sink.SinkFunction;
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
 import org.apache.flink.training.exercises.common.datatypes.TaxiRide;
 import org.apache.flink.training.exercises.common.sources.TaxiRideGenerator;
-import org.apache.flink.training.exercises.common.utils.MissingSolutionException;
 import org.apache.flink.util.Collector;
 
 import java.time.Duration;
@@ -100,7 +99,7 @@ public class LongRidesExercise {
 
         @Override
         public void open(Configuration config) throws Exception {
-            throw new MissingSolutionException();
+            throw new IllegalArgumentException();
         }
 
         @Override

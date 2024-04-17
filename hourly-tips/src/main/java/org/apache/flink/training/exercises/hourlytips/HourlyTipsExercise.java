@@ -27,7 +27,6 @@ import org.apache.flink.streaming.api.functions.sink.SinkFunction;
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
 import org.apache.flink.training.exercises.common.datatypes.TaxiFare;
 import org.apache.flink.training.exercises.common.sources.TaxiFareGenerator;
-import org.apache.flink.training.exercises.common.utils.MissingSolutionException;
 
 /**
  * The Hourly Tips exercise from the Flink training.
@@ -77,7 +76,7 @@ public class HourlyTipsExercise {
 
         // replace this with your solution
         if (true) {
-            throw new MissingSolutionException();
+            throw new IllegalArgumentException();
         }
 
         // the results should be sent to the sink that was passed in
