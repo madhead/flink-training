@@ -19,17 +19,25 @@
 package org.apache.flink.training.exercises.common.datatypes;
 
 import java.io.Serializable;
+import java.util.Objects;
 
-/** Holds a TaxiRide and a TaxiFare. */
+/**
+ * Holds a TaxiRide and a TaxiFare.
+ */
 public class RideAndFare implements Serializable {
 
     public TaxiRide ride;
     public TaxiFare fare;
 
-    /** Default constructor. */
-    public RideAndFare() {}
+    /**
+     * Default constructor.
+     */
+    public RideAndFare() {
+    }
 
-    /** Create a RideAndFare from the ride and fare provided. */
+    /**
+     * Create a RideAndFare from the ride and fare provided.
+     */
     public RideAndFare(TaxiRide ride, TaxiFare fare) {
         this.ride = ride;
         this.fare = fare;
@@ -37,16 +45,21 @@ public class RideAndFare implements Serializable {
 
     @Override
     public String toString() {
-        return "<" + ride.toString() + " / " + fare.toString() + ">";
+        return "<" + Objects.toString(ride, "null") + " / " + Objects.toString(fare, "null") + ">";
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (!(other instanceof RideAndFare)) {
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
             return false;
-        }
+        RideAndFare that = (RideAndFare) o;
+        return Objects.equals(ride, that.ride) && Objects.equals(fare, that.fare);
+    }
 
-        RideAndFare otherRandF = (RideAndFare) other;
-        return this.ride.equals(otherRandF.ride) && this.fare.equals(otherRandF.fare);
+    @Override
+    public int hashCode() {
+        return Objects.hash(ride, fare);
     }
 }
