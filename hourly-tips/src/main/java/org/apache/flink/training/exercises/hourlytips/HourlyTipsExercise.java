@@ -90,3 +90,70 @@ public class HourlyTipsExercise {
         return env.execute("Hourly Tips");
     }
 }
+
+/*
+public JobExecutionResult execute() throws Exception {
+    // set up streaming execution environment
+    StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
+    // start the data generator
+    DataStream<TaxiFare> fares = env
+            .addSource(source)
+            .assignTimestampsAndWatermarks(
+                    WatermarkStrategy
+                            .<TaxiFare>forMonotonousTimestamps()
+                            .withTimestampAssigner(
+                                    (fare, elementTimeStamp) -> fare.getEventTimeMillis()
+                            )
+            );
+
+    fares
+            .map(fare -> Tuple2.of(fare.driverId, fare.tip))
+            .returns(new TypeHint<Tuple2<Long, Float>>() {})
+
+            .keyBy(tuple -> tuple.f0)
+
+            .window(TumblingEventTimeWindows.of(Time.hours(1)))
+
+            .reduce(
+                    new HourlyTipsReduceFunction(),
+                    new WrapWithWindowInfo()
+            )
+
+            .windowAll(TumblingEventTimeWindows.of(Time.hours(1)))
+
+            .maxBy(2)
+
+            .addSink(sink);
+
+    return env.execute("Hourly Tips");
+}
+
+static class HourlyTipsReduceFunction implements ReduceFunction<Tuple2<Long, Float>> {
+    @Override
+    public Tuple2<Long, Float> reduce(Tuple2<Long, Float> value1, Tuple2<Long, Float> value2) throws Exception {
+        return Tuple2.of(value1.f0, value1.f1 + value2.f1);
+    }
+}
+
+static class WrapWithWindowInfo extends ProcessWindowFunction<Tuple2<Long, Float>, Tuple3<Long, Long, Float>, Long, TimeWindow> {
+    @Override
+    public void process(
+            Long key,
+            ProcessWindowFunction<Tuple2<Long, Float>, Tuple3<Long, Long, Float>, Long, TimeWindow>.Context context,
+            Iterable<Tuple2<Long, Float>> elements,
+            Collector<Tuple3<Long, Long, Float>> out
+    ) throws Exception {
+        out.collect(
+                Tuple3.of(
+                        context.window().getEnd(),
+                        key,
+                        (float) StreamSupport.stream(elements.spliterator(), false)
+                                .mapToDouble(tuple -> tuple.f1)
+                                .sum()
+                )
+        );
+    }
+}
+
+ */
